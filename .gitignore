@@ -1,0 +1,77 @@
+# Flutter/Dart
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+*.iml
+
+# Generated files
+*.g.dart
+*.freezed.dart
+*.gen.dart
+*.mocks.dart
+lib/l10n/gen/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+*.dSYM/
+macos/Pods/
+macos/Flutter/ephemeral/
+
+# iOS
+ios/Pods/
+ios/Flutter/ephemeral/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+
+# Android
+android/.gradle/
+android/local.properties
+android/key.properties
+android/*.keystore
+android/app/debug/
+android/app/profile/
+android/app/release/
+
+# Web
+web/favicon.png
+
+# Environment & secrets
+.env
+.env.*
+*.p12
+*.pem
+*.key
+
+# Coverage
+coverage/
+lcov.info
+
+# Claude Flow / Swarm / Tooling
+.claude-flow/
+.claude/
+.swarm/
+.superset/
+.mcp.json
+.cursor/
+CLAUDE.md
+CLAUDE-flow.md
+
+# Logs
+*.log
+flutter_*.log
+
+# Pub
+.pub-cache/
+.pub/
+pubspec.lock
