@@ -1,4 +1,6 @@
 import 'package:somnio/core/error/failures.dart';
+import 'package:somnio/features/auth/domain/entities/auth_tokens.dart';
+import 'package:somnio/features/auth/domain/entities/user_entity.dart';
 import 'package:somnio/features/posts/data/models/post_model.dart';
 import 'package:somnio/features/posts/domain/entities/post_entity.dart';
 
@@ -35,4 +37,20 @@ abstract final class TestFixtures {
   static const cacheFailure = CacheFailure(
     message: 'No cached data',
   );
+
+  static const authFailure = AuthFailure(
+    message: 'Invalid credentials',
+    statusCode: 401,
+  );
+
+  static const authTokens = AuthTokens(
+    accessToken: 'test_access_token',
+    refreshToken: 'test_refresh_token',
+  );
+
+  static UserEntity userEntity({String id = '1'}) => UserEntity(
+        id: id,
+        email: 'test@example.com',
+        name: 'Test User',
+      );
 }

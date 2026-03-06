@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:app_ui/app_ui.dart' show AppColors;
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:somnio/app/theme/app_theme.dart';
 
@@ -12,17 +13,17 @@ void main() {
       expect(AppTheme.darkTheme.brightness, Brightness.dark);
     });
 
-    test('lightTheme primaryColor is systemBlue', () {
+    test('lightTheme primary color matches AppColors.primary', () {
       expect(
-        AppTheme.lightTheme.primaryColor,
-        CupertinoColors.systemBlue,
+        AppTheme.lightTheme.colorScheme.primary,
+        AppColors.primary,
       );
     });
 
-    test('darkTheme primaryColor is systemBlue', () {
+    test('darkTheme primary color matches AppColors.darkPrimary', () {
       expect(
-        AppTheme.darkTheme.primaryColor,
-        CupertinoColors.systemBlue,
+        AppTheme.darkTheme.colorScheme.primary,
+        AppColors.darkPrimary,
       );
     });
   });
