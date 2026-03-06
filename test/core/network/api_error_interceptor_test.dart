@@ -136,7 +136,6 @@ void main() {
       interceptor.onError(
         DioException(
           requestOptions: makeOptions(),
-          type: DioExceptionType.unknown,
         ),
         _CapturingHandler(onNext: (e) => passed = e),
       );
