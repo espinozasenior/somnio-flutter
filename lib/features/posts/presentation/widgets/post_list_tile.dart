@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:somnio/features/posts/domain/entities/post_entity.dart';
 
 class PostListTile extends StatelessWidget {
@@ -17,9 +17,11 @@ class PostListTile extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           border: Border(
-            bottom: BorderSide(color: CupertinoColors.separator),
+            bottom: BorderSide(
+              color: Theme.of(context).colorScheme.outlineVariant,
+            ),
           ),
         ),
         child: Row(
@@ -32,28 +34,26 @@ class PostListTile extends StatelessWidget {
                     post.title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: CupertinoTheme.of(context)
+                    style: Theme.of(context)
                         .textTheme
-                        .textStyle
-                        .copyWith(fontWeight: FontWeight.w600),
+                        .bodyLarge
+                        ?.copyWith(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     post.body,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: CupertinoTheme.of(context)
-                        .textTheme
-                        .tabLabelTextStyle,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],
               ),
             ),
             const SizedBox(width: 8),
-            const Icon(
-              CupertinoIcons.chevron_forward,
+            Icon(
+              Icons.chevron_right,
               size: 16,
-              color: CupertinoColors.systemGrey,
+              color: Theme.of(context).colorScheme.outline,
             ),
           ],
         ),

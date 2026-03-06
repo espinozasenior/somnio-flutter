@@ -1,9 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 extension ContextExtensions on BuildContext {
-  CupertinoThemeData get theme => CupertinoTheme.of(this);
+  ThemeData get theme => Theme.of(this);
 
-  CupertinoTextThemeData get textTheme => theme.textTheme;
+  TextTheme get textTheme => theme.textTheme;
+
+  ColorScheme get colorScheme => theme.colorScheme;
 
   MediaQueryData get mediaQuery => MediaQuery.of(this);
 

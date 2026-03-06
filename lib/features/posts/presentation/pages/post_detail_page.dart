@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:somnio/core/di/injection.dart';
 import 'package:somnio/core/widgets/error_view.dart';
@@ -28,48 +28,41 @@ class _PostDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Post Detail'),
-      ),
-      child: SafeArea(
-        child: BlocBuilder<PostDetailCubit, PostDetailState>(
-          builder: (context, state) {
-            return switch (state) {
-              PostDetailInitial() => const SizedBox.shrink(),
-              PostDetailLoading() => const CupertinoLoadingView(),
-              PostDetailLoaded(:final post) => Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        post.title,
-                        style: CupertinoTheme.of(context)
-                            .textTheme
-                            .navLargeTitleTextStyle,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        post.body,
-                        style:
-                            CupertinoTheme.of(context).textTheme.textStyle,
-                      ),
-                    ],
-                  ),
+    return Scaffold(
+      appBar: AppBar(title: const Text('Post Detail')),
+      body: BlocBuilder<PostDetailCubit, PostDetailState>(
+        builder: (context, state) {
+          return switch (state) {
+            PostDetailInitial() => const SizedBox.shrink(),
+            PostDetailLoading() => const LoadingView(),
+            PostDetailLoaded(:final post) => Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      post.title,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      post.body,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ],
                 ),
-              PostDetailError(:final failure) => CupertinoErrorView(
-                  failure: failure,
-                  onRetry: () async {
-                    final parsedId = int.tryParse(id);
-                    if (parsedId != null) {
-                      await context.read<PostDetailCubit>().loadPost(parsedId);
-                    }
-                  },
-                ),
-            };
-          },
-        ),
+              ),
+            PostDetailError(:final failure) => ErrorView(
+                failure: failure,
+                onRetry: () async {
+                  final parsedId = int.tryParse(id);
+                  if (parsedId != null) {
+                    await context.read<PostDetailCubit>().loadPost(parsedId);
+                  }
+                },
+              ),
+          };
+        },
       ),
     );
   }
