@@ -3,5 +3,137 @@
     "counterAppBarTitle": "Counter",
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
+    },
+    "loginTitle": "Welcome back",
+    "@loginTitle": {
+        "description": "Title shown on the login page"
+    },
+    "loginSubtitle": "Sign in to your account",
+    "@loginSubtitle": {
+        "description": "Subtitle shown on the login page"
+    },
+    "signInButton": "Sign In",
+    "@signInButton": {
+        "description": "Text for the sign in button"
+    },
+    "signUpButton": "Sign Up",
+    "@signUpButton": {
+        "description": "Text for the sign up button"
+    },
+    "signUpTitle": "Create Account",
+    "@signUpTitle": {
+        "description": "Title shown on the sign up page"
+    },
+    "signUpSubtitle": "Sign up to get started",
+    "@signUpSubtitle": {
+        "description": "Subtitle shown on the sign up page"
+    },
+    "emailLabel": "Email",
+    "@emailLabel": {
+        "description": "Label for email input field"
+    },
+    "passwordLabel": "Password",
+    "@passwordLabel": {
+        "description": "Label for password input field"
+    },
+    "confirmPasswordLabel": "Confirm Password",
+    "@confirmPasswordLabel": {
+        "description": "Label for confirm password input field"
+    },
+    "nameLabel": "Name",
+    "@nameLabel": {
+        "description": "Label for name input field"
+    },
+    "forgotPasswordTitle": "Forgot Password",
+    "@forgotPasswordTitle": {
+        "description": "Title for forgot password page"
+    },
+    "forgotPasswordSubtitle": "Enter your email address and we will send you a link to reset your password.",
+    "@forgotPasswordSubtitle": {
+        "description": "Subtitle for forgot password page"
+    },
+    "sendResetLink": "Send Reset Link",
+    "@sendResetLink": {
+        "description": "Text for the send reset link button"
+    },
+    "backToSignIn": "Back to Sign In",
+    "@backToSignIn": {
+        "description": "Text for the back to sign in link"
+    },
+    "noAccountSignUp": "Don't have an account? Sign Up",
+    "@noAccountSignUp": {
+        "description": "Text for the sign up link on login page"
+    },
+    "hasAccountSignIn": "Already have an account? Sign In",
+    "@hasAccountSignIn": {
+        "description": "Text for the sign in link on sign up page"
+    },
+    "continueWithGoogle": "Continue with Google",
+    "@continueWithGoogle": {
+        "description": "Text for Google sign in button"
+    },
+    "continueWithApple": "Continue with Apple",
+    "@continueWithApple": {
+        "description": "Text for Apple sign in button"
+    },
+    "or": "or",
+    "@or": {
+        "description": "Divider text between login options"
+    },
+    "invalidEmail": "Invalid email",
+    "@invalidEmail": {
+        "description": "Error text for invalid email"
+    },
+    "passwordTooShort": "Password must be at least 8 characters",
+    "@passwordTooShort": {
+        "description": "Error text for short password"
+    },
+    "passwordMismatch": "Passwords do not match",
+    "@passwordMismatch": {
+        "description": "Error text for password mismatch"
+    },
+    "nameTooShort": "Name must be at least 2 characters",
+    "@nameTooShort": {
+        "description": "Error text for short name"
+    },
+    "authenticationFailed": "Authentication failed",
+    "@authenticationFailed": {
+        "description": "Generic authentication error message"
+    },
+    "registrationFailed": "Registration failed",
+    "@registrationFailed": {
+        "description": "Generic registration error message"
+    },
+    "changePasswordTitle": "Change Password",
+    "@changePasswordTitle": {
+        "description": "Title for change password page"
+    },
+    "currentPasswordLabel": "Current Password",
+    "@currentPasswordLabel": {
+        "description": "Label for current password input"
+    },
+    "newPasswordLabel": "New Password",
+    "@newPasswordLabel": {
+        "description": "Label for new password input"
+    },
+    "deleteAccountTitle": "Delete Account",
+    "@deleteAccountTitle": {
+        "description": "Title for delete account confirmation"
+    },
+    "deleteAccountConfirmation": "Are you sure you want to delete your account? This action cannot be undone.",
+    "@deleteAccountConfirmation": {
+        "description": "Confirmation message for account deletion"
+    },
+    "retryButton": "Retry",
+    "@retryButton": {
+        "description": "Text for retry button"
+    },
+    "errorTitle": "Error",
+    "@errorTitle": {
+        "description": "Title for error dialogs"
+    },
+    "okButton": "OK",
+    "@okButton": {
+        "description": "Text for OK button"
     }
 }
