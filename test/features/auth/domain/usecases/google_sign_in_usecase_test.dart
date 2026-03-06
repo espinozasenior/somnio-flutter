@@ -51,5 +51,12 @@ void main() {
       expect(params1, equals(params2));
       expect(params1, isNot(equals(params3)));
     });
+
+    test('$SocialSignInParams props contains token', () {
+      // Non-const to force runtime constructor execution.
+      // ignore: prefer_const_constructors
+      final params = SocialSignInParams(token: 'abc');
+      expect(params.props, ['abc']);
+    });
   });
 }

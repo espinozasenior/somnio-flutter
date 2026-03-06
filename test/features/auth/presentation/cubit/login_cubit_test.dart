@@ -137,6 +137,34 @@ void main() {
               ),
         ],
       );
+
+      blocTest<LoginCubit, LoginState>(
+        'emits success even when userRepository.login throws',
+        build: buildCubit,
+        setUp: () {
+          when(() => mockLoginUseCase(any()))
+              .thenAnswer((_) async => const Right(TestFixtures.authTokens));
+          when(
+            () => mockUserRepository.login(
+              email: any(named: 'email'),
+              password: any(named: 'password'),
+            ),
+          ).thenThrow(Exception('repo error'));
+        },
+        seed: () => const LoginState(
+          email: Email.dirty('test@example.com'),
+          password: Password.dirty('password123'),
+        ),
+        act: (cubit) => cubit.loginWithCredentials(),
+        expect: () => [
+          isA<LoginState>()
+              .having((s) => s.status, 'status',
+                  FormzSubmissionStatus.inProgress),
+          isA<LoginState>()
+              .having((s) => s.status, 'status',
+                  FormzSubmissionStatus.success),
+        ],
+      );
     });
   });
 }

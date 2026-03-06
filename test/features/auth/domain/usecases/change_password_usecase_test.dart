@@ -58,5 +58,15 @@ void main() {
       expect(params1, equals(params2));
       expect(params1, isNot(equals(params3)));
     });
+
+    test('$ChangePasswordParams props contains both fields', () {
+      // Non-const to force runtime constructor execution.
+      // ignore: prefer_const_constructors
+      final params = ChangePasswordParams(
+        currentPassword: 'a',
+        newPassword: 'b',
+      );
+      expect(params.props, ['a', 'b']);
+    });
   });
 }
