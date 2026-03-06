@@ -23,3 +23,13 @@ class NetworkException implements Exception {
   @override
   String toString() => 'NetworkException: No internet connection';
 }
+
+class AuthException implements Exception {
+  const AuthException({required this.message, this.statusCode});
+
+  final String message;
+  final int? statusCode;
+
+  @override
+  String toString() => 'AuthException($statusCode): $message';
+}
