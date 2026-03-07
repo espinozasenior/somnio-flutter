@@ -1,38 +1,36 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class CupertinoTabShell extends StatelessWidget {
-  const CupertinoTabShell({required this.navigationShell, super.key});
+class TabShell extends StatelessWidget {
+  const TabShell({required this.navigationShell, super.key});
 
   final StatefulNavigationShell navigationShell;
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: CupertinoTheme.of(context).scaffoldBackgroundColor,
-      child: Column(
-        children: [
-          Expanded(child: navigationShell),
-          CupertinoTabBar(
-            currentIndex: navigationShell.currentIndex,
-            onTap: (index) => navigationShell.goBranch(
-              index,
-              initialLocation: index == navigationShell.currentIndex,
-            ),
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.news),
-                label: 'Feed',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.search),
-                label: 'Search',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.person),
-                label: 'Profile',
-              ),
-            ],
+    return Scaffold(
+      body: navigationShell,
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: navigationShell.currentIndex,
+        onDestinationSelected: (index) => navigationShell.goBranch(
+          index,
+          initialLocation: index == navigationShell.currentIndex,
+        ),
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.article_outlined),
+            selectedIcon: Icon(Icons.article),
+            label: 'Feed',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.search_outlined),
+            selectedIcon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.person_outlined),
+            selectedIcon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
       ),

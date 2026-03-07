@@ -1,18 +1,17 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:somnio/core/error/failures.dart';
 
-Future<void> showCupertinoErrorDialog(
+Future<void> showErrorDialog(
   BuildContext context,
   Failure failure,
 ) {
-  return showCupertinoDialog<void>(
+  return showDialog<void>(
     context: context,
-    builder: (_) => CupertinoAlertDialog(
+    builder: (_) => AlertDialog(
       title: const Text('Error'),
       content: Text(failure.message),
       actions: [
-        CupertinoDialogAction(
-          isDefaultAction: true,
+        TextButton(
           onPressed: () => Navigator.pop(context),
           child: const Text('OK'),
         ),

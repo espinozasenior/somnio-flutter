@@ -28,8 +28,7 @@ void main() {
     });
 
     test('returns $Failure when repository fails', () async {
-      fakeRepository.getPostByIdResult =
-          const Left(TestFixtures.serverFailure);
+      fakeRepository.getPostByIdResult = const Left(TestFixtures.serverFailure);
 
       final result = await useCase(99);
 

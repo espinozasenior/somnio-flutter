@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class PostShimmer extends StatelessWidget {
@@ -12,8 +12,8 @@ class PostShimmer extends StatelessWidget {
       itemCount: itemCount,
       itemBuilder: (context, index) {
         return Shimmer.fromColors(
-          baseColor: CupertinoColors.systemGrey5,
-          highlightColor: CupertinoColors.systemGrey6,
+          baseColor: Colors.grey.shade300,
+          highlightColor: Colors.grey.shade100,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Column(
@@ -23,7 +23,7 @@ class PostShimmer extends StatelessWidget {
                   width: double.infinity,
                   height: 16,
                   decoration: BoxDecoration(
-                    color: CupertinoColors.white,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
@@ -32,7 +32,7 @@ class PostShimmer extends StatelessWidget {
                   width: 200,
                   height: 12,
                   decoration: BoxDecoration(
-                    color: CupertinoColors.white,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),

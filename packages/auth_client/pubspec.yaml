@@ -1,0 +1,26 @@
+name: auth_client
+description: Retrofit API client for NestJS auth endpoints
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+  flutter: ^3.41.0
+
+dependencies:
+  dio: ^5.7.0
+  flutter:
+    sdk: flutter
+  json_annotation: ^4.9.0
+  retrofit: ^4.4.0
+  token_provider:
+    path: ../token_provider
+
+dev_dependencies:
+  build_runner: ^2.4.0
+  flutter_test:
+    sdk: flutter
+  json_serializable: ^6.8.0
+  mocktail: ^1.0.4
+  retrofit_generator: ^10.2.3
+  very_good_analysis: ^10.2.0

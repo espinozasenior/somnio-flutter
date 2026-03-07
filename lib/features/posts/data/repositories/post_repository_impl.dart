@@ -13,9 +13,9 @@ class PostRepositoryImpl implements PostRepository {
     required PostRemoteDataSource remoteDataSource,
     required PostLocalDataSource localDataSource,
     required NetworkInfo networkInfo,
-  })  : _remoteDataSource = remoteDataSource,
-        _localDataSource = localDataSource,
-        _networkInfo = networkInfo;
+  }) : _remoteDataSource = remoteDataSource,
+       _localDataSource = localDataSource,
+       _networkInfo = networkInfo;
 
   final PostRemoteDataSource _remoteDataSource;
   final PostLocalDataSource _localDataSource;

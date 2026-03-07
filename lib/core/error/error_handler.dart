@@ -18,6 +18,10 @@ Future<Either<Failure, T>> safeApiCall<T>(
     return const Left(
       NetworkFailure(message: 'No internet connection'),
     );
+  } on AuthException catch (e) {
+    return Left(
+      AuthFailure(message: e.message, statusCode: e.statusCode),
+    );
   } on Exception catch (e) {
     return Left(ServerFailure(message: e.toString()));
   }

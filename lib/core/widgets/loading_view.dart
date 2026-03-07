@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class CupertinoLoadingView extends StatelessWidget {
-  const CupertinoLoadingView({this.message, super.key});
+class LoadingView extends StatelessWidget {
+  const LoadingView({this.message, super.key});
 
   final String? message;
 
@@ -11,12 +11,12 @@ class CupertinoLoadingView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const CupertinoActivityIndicator(radius: 16),
+          const CircularProgressIndicator(),
           if (message != null) ...[
             const SizedBox(height: 16),
             Text(
               message!,
-              style: CupertinoTheme.of(context).textTheme.textStyle,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         ],

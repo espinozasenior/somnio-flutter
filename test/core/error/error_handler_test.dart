@@ -42,8 +42,7 @@ void main() {
 
     test('returns Left($CacheFailure) on $CacheException', () async {
       final result = await safeApiCall<int>(
-        () async =>
-            throw const CacheException(message: 'No cached data'),
+        () async => throw const CacheException(message: 'No cached data'),
       );
       expect(
         result,
@@ -51,6 +50,35 @@ void main() {
           (l) => l.value,
           'failure',
           isA<CacheFailure>(),
+        ),
+      );
+    });
+
+    test('returns Left($AuthFailure) on $AuthException', () async {
+      final result = await safeApiCall<int>(
+        () async => throw const AuthException(
+          message: 'Unauthorized',
+          statusCode: 401,
+        ),
+      );
+      expect(
+        result,
+        const Left<Failure, int>(
+          AuthFailure(message: 'Unauthorized', statusCode: 401),
+        ),
+      );
+    });
+
+    test('returns Left($ServerFailure) on generic Exception', () async {
+      final result = await safeApiCall<int>(
+        () async => throw Exception('something went wrong'),
+      );
+      expect(
+        result,
+        isA<Left<Failure, int>>().having(
+          (l) => l.value,
+          'failure',
+          isA<ServerFailure>(),
         ),
       );
     });
@@ -64,8 +92,21 @@ void main() {
 
     test('returns Left($CacheFailure) on $CacheException', () async {
       final result = await safeCacheCall<String>(
-        () async =>
-            throw const CacheException(message: 'empty'),
+        () async => throw const CacheException(message: 'empty'),
+      );
+      expect(
+        result,
+        isA<Left<Failure, String>>().having(
+          (l) => l.value,
+          'failure',
+          isA<CacheFailure>(),
+        ),
+      );
+    });
+
+    test('returns Left($CacheFailure) on generic Exception', () async {
+      final result = await safeCacheCall<String>(
+        () async => throw Exception('unexpected'),
       );
       expect(
         result,

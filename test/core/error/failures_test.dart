@@ -36,5 +36,19 @@ void main() {
       const b = CacheFailure(message: 'err');
       expect(a, isNot(equals(b)));
     });
+
+    test('$AuthFailure stores message and statusCode', () {
+      const failure = AuthFailure(message: 'bad auth', statusCode: 401);
+      expect(failure.message, 'bad auth');
+      expect(failure.statusCode, 401);
+      expect(failure.props, ['bad auth', 401]);
+    });
+
+    test('$ValidationFailure props contain message and null statusCode', () {
+      // Non-const to ensure runtime constructor coverage.
+      // ignore: prefer_const_constructors
+      final failure = ValidationFailure(message: 'bad input');
+      expect(failure.props, ['bad input', null]);
+    });
   });
 }

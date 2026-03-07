@@ -43,18 +43,18 @@ class PostModel extends Equatable {
 
 extension PostModelX on PostModel {
   PostEntity toEntity() => PostEntity(
-        id: id,
-        userId: userId,
-        title: title,
-        body: body,
-      );
+    id: id,
+    userId: userId,
+    title: title,
+    body: body,
+  );
 }
 
 extension PostEntityX on PostEntity {
   PostModel toModel() => PostModel(
-        id: id,
-        userId: userId,
-        title: title,
-        body: body,
-      );
+    id: id,
+    userId: userId,
+    title: title,
+    body: body,
+  );
 }
