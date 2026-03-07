@@ -53,7 +53,7 @@ jobs:
           channel: stable
           cache: true
       - run: ./scripts/ci_bootstrap.sh
-      - run: flutter build apk --release --split-per-abi --target lib/main_production.dart
+      - run: flutter build apk --release --split-per-abi --flavor production --target lib/main_production.dart
       - uses: actions/upload-artifact@v4
         with:
           name: android-apk
@@ -70,7 +70,7 @@ jobs:
           channel: stable
           cache: true
       - run: ./scripts/ci_bootstrap.sh
-      - run: flutter build ios --release --no-codesign --target lib/main_production.dart
+      - run: flutter build ios --release --no-codesign --flavor production --target lib/main_production.dart
       - uses: actions/upload-artifact@v4
         with:
           name: ios-build
@@ -87,7 +87,7 @@ jobs:
           channel: stable
           cache: true
       - run: ./scripts/ci_bootstrap.sh
-      - run: flutter build web --release --target lib/main_production.dart
+      - run: flutter build web --release --flavor production --target lib/main_production.dart
       - uses: actions/upload-artifact@v4
         with:
           name: web-build
