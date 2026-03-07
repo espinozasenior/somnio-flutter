@@ -43,13 +43,72 @@ SOURCE_ROOTS_VALID=true
 echo ""
 echo "[CRITICAL] Tooling availability"
 if command -v rg >/dev/null 2>&1; then
-  RG_AVAILABLE=true
+  SEARCH_TOOL="rg"
   echo "PASS: rg is available"
+elif command -v grep >/dev/null 2>&1; then
+  SEARCH_TOOL="grep"
+  echo "PASS: grep is available (rg not found, using grep fallback)"
 else
-  RG_AVAILABLE=false
-  echo "FAIL: rg is required but not available in PATH"
+  SEARCH_TOOL=""
+  echo "FAIL: neither rg nor grep is available in PATH"
   critical_failures=$((critical_failures + 1))
 fi
+# SEARCH_TOOL is checked directly in conditions below
+
+# Portable search: rg_search <pattern> <paths...> [--glob <glob>]
+# Translates rg flags to grep equivalents when rg is unavailable.
+rg_search() {
+  local pattern="$1"; shift
+  local glob=""
+  local paths=()
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --glob) glob="$2"; shift 2 ;;
+      *) paths+=("$1"); shift ;;
+    esac
+  done
+
+  if [[ "$SEARCH_TOOL" == "rg" ]]; then
+    if [[ -n "$glob" ]]; then
+      rg --no-heading --line-number "$pattern" "${paths[@]}" --glob "$glob"
+    else
+      rg --no-heading --line-number "$pattern" "${paths[@]}"
+    fi
+  else
+    local include_flag=""
+    if [[ -n "$glob" ]]; then
+      include_flag="--include=$glob"
+    fi
+    grep -rn $include_flag "$pattern" "${paths[@]}"
+  fi
+}
+
+# Case-insensitive variant
+rg_search_i() {
+  local pattern="$1"; shift
+  local glob=""
+  local paths=()
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --glob) glob="$2"; shift 2 ;;
+      *) paths+=("$1"); shift ;;
+    esac
+  done
+
+  if [[ "$SEARCH_TOOL" == "rg" ]]; then
+    if [[ -n "$glob" ]]; then
+      rg --no-heading --line-number -i "$pattern" "${paths[@]}" --glob "$glob"
+    else
+      rg --no-heading --line-number -i "$pattern" "${paths[@]}"
+    fi
+  else
+    local include_flag=""
+    if [[ -n "$glob" ]]; then
+      include_flag="--include=$glob"
+    fi
+    grep -rni $include_flag "$pattern" "${paths[@]}"
+  fi
+}
 
 echo ""
 echo "[CRITICAL] Melos workspace config exists"
@@ -72,8 +131,8 @@ fi
 
 echo ""
 echo "[CRITICAL] No Flutter SDK imports in domain layer"
-if [[ "$RG_AVAILABLE" == true && "$SOURCE_ROOTS_VALID" == true ]]; then
-  if rg --no-heading --line-number 'package:flutter' lib/features --glob '*/domain/**/*.dart'; then
+if [[ -n "$SEARCH_TOOL" && "$SOURCE_ROOTS_VALID" == true ]]; then
+  if rg_search 'package:flutter' lib/features --glob '*/domain/**/*.dart'; then
     echo "FAIL: Domain layer contains Flutter imports"
     critical_failures=$((critical_failures + 1))
   else
@@ -86,8 +145,8 @@ fi
 
 echo ""
 echo "[CRITICAL] No hardcoded credentials in source files"
-if [[ "$RG_AVAILABLE" == true && "$SOURCE_ROOTS_VALID" == true ]]; then
-  if rg --no-heading --line-number -i '(api[_-]?key|client[_-]?secret|private[_-]?key)\s*[:=]\s*["\x27][^"\x27]+["\x27]' lib packages --glob '*.dart'; then
+if [[ -n "$SEARCH_TOOL" && "$SOURCE_ROOTS_VALID" == true ]]; then
+  if rg_search_i '(api[_-]?key|client[_-]?secret|private[_-]?key)\s*[:=]\s*["\x27][^"\x27]+["\x27]' lib packages --glob '*.dart'; then
     echo "FAIL: Potential hardcoded credentials found"
     critical_failures=$((critical_failures + 1))
   else
@@ -100,8 +159,8 @@ fi
 
 echo ""
 echo "[CRITICAL] Generated files exist for all part directives"
-if [[ "$RG_AVAILABLE" == true && "$SOURCE_ROOTS_VALID" == true ]]; then
-  part_lines="$(rg --no-heading --line-number "part '\\S+\\.g\\.dart';" lib packages --glob '*.dart' || true)"
+if [[ -n "$SEARCH_TOOL" && "$SOURCE_ROOTS_VALID" == true ]]; then
+  part_lines="$(rg_search "part '\\S+\\.g\\.dart';" lib packages --glob '*.dart' || true)"
   missing_parts=0
   if [[ -n "$part_lines" ]]; then
     while IFS= read -r line; do
@@ -128,8 +187,8 @@ fi
 
 echo ""
 echo "[ADVISORY] Avoid print in production code"
-if [[ "$RG_AVAILABLE" == true && "$SOURCE_ROOTS_VALID" == true ]]; then
-  if rg --no-heading --line-number '\bprint\s*\(' lib packages --glob '*.dart'; then
+if [[ -n "$SEARCH_TOOL" && "$SOURCE_ROOTS_VALID" == true ]]; then
+  if rg_search '\bprint\s*\(' lib packages --glob '*.dart'; then
     echo "WARN: Prefer structured logging over print"
     advisory_warnings=$((advisory_warnings + 1))
   else
@@ -142,8 +201,8 @@ fi
 
 echo ""
 echo "[ADVISORY] Track pending TODO/FIXME debt"
-if [[ "$RG_AVAILABLE" == true && "$SOURCE_ROOTS_VALID" == true ]]; then
-  if rg --no-heading --line-number '(TODO|FIXME)' lib packages --glob '*.dart'; then
+if [[ -n "$SEARCH_TOOL" && "$SOURCE_ROOTS_VALID" == true ]]; then
+  if rg_search '(TODO|FIXME)' lib packages --glob '*.dart'; then
     echo "WARN: TODO/FIXME markers found in source code"
     advisory_warnings=$((advisory_warnings + 1))
   else
