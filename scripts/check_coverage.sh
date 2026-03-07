@@ -1,7 +1,10 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 echo "=== Somnio Coverage Check ==="
+
+echo "Bootstrapping monorepo..."
+./scripts/ci_bootstrap.sh
 
 echo "Running tests with coverage..."
 flutter test --coverage
@@ -12,7 +15,12 @@ lcov --remove coverage/lcov.info \
     'lib/l10n/*' 'lib/core/di/injection.config.dart' \
     -o coverage/lcov_filtered.info
 
-TOTAL=$(lcov --summary coverage/lcov_filtered.info 2>&1 | grep 'lines' | awk -F'[%]' '{print $1}' | awk '{print $NF}')
+TOTAL=$(
+  lcov --summary coverage/lcov_filtered.info 2>&1 \
+    | rg 'lines' \
+    | awk -F'[%]' '{print $1}' \
+    | awk '{print $NF}'
+)
 echo "Coverage: ${TOTAL}%"
 
 if (( $(echo "$TOTAL < 100.0" | bc -l) )); then

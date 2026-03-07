@@ -20,11 +20,8 @@ jobs:
         with:
           channel: stable
           cache: true
-      - run: dart pub global activate melos 6.3.3
-      - run: echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
-      - run: flutter pub get
-      - run: melos bootstrap
-      - run: melos run codegen
+      - run: ./scripts/ci_bootstrap.sh
+      - run: ./scripts/verify_monorepo_compliance.sh --strict
       - run: flutter analyze --fatal-infos
       - run: dart format --set-exit-if-changed lib/ test/
 
@@ -38,11 +35,7 @@ jobs:
         with:
           channel: stable
           cache: true
-      - run: dart pub global activate melos 6.3.3
-      - run: echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
-      - run: flutter pub get
-      - run: melos bootstrap
-      - run: melos run codegen
+      - run: ./scripts/ci_bootstrap.sh
       - run: flutter test --coverage --reporter expanded
 
   build_android:
@@ -59,11 +52,7 @@ jobs:
         with:
           channel: stable
           cache: true
-      - run: dart pub global activate melos 6.3.3
-      - run: echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
-      - run: flutter pub get
-      - run: melos bootstrap
-      - run: melos run codegen
+      - run: ./scripts/ci_bootstrap.sh
       - run: flutter build apk --release --split-per-abi
       - uses: actions/upload-artifact@v4
         with:
@@ -80,11 +69,7 @@ jobs:
         with:
           channel: stable
           cache: true
-      - run: dart pub global activate melos 6.3.3
-      - run: echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
-      - run: flutter pub get
-      - run: melos bootstrap
-      - run: melos run codegen
+      - run: ./scripts/ci_bootstrap.sh
       - run: flutter build ios --release --no-codesign
       - uses: actions/upload-artifact@v4
         with:
@@ -101,11 +86,7 @@ jobs:
         with:
           channel: stable
           cache: true
-      - run: dart pub global activate melos 6.3.3
-      - run: echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
-      - run: flutter pub get
-      - run: melos bootstrap
-      - run: melos run codegen
+      - run: ./scripts/ci_bootstrap.sh
       - run: flutter build web --release
       - uses: actions/upload-artifact@v4
         with:

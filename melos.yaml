@@ -12,3 +12,9 @@ scripts:
   codegen:
     description: Run build_runner in all codegen-enabled packages.
     run: dart run build_runner build --delete-conflicting-outputs && melos exec --depends-on="build_runner" -- dart run build_runner build --delete-conflicting-outputs
+  compliance:
+    description: Run monorepo compliance checks in advisory mode.
+    run: ./scripts/verify_monorepo_compliance.sh
+  compliance:strict:
+    description: Run monorepo compliance checks in strict mode.
+    run: ./scripts/verify_monorepo_compliance.sh --strict
