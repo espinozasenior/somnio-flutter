@@ -26,8 +26,9 @@ void main() {
     });
 
     test('returns $Failure when repository fails', () async {
-      fakeRepository.deleteAccountResult =
-          const Left(TestFixtures.serverFailure);
+      fakeRepository.deleteAccountResult = const Left(
+        TestFixtures.serverFailure,
+      );
 
       final result = await useCase(const NoParams());
 

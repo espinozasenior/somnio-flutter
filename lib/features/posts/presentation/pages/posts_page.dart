@@ -35,23 +35,23 @@ class PostsView extends StatelessWidget {
             PostsInitial() => const SizedBox.shrink(),
             PostsLoading() => const LoadingView(),
             PostsLoaded(:final posts) => ListView.builder(
-                itemCount: posts.length,
-                itemBuilder: (context, index) {
-                  final post = posts[index];
-                  return PostListTile(
-                    post: post,
-                    onTap: () {
-                      GoRouter.of(context).go(
-                        '${RoutePaths.feed}/${post.id}',
-                      );
-                    },
-                  );
-                },
-              ),
+              itemCount: posts.length,
+              itemBuilder: (context, index) {
+                final post = posts[index];
+                return PostListTile(
+                  post: post,
+                  onTap: () {
+                    GoRouter.of(context).go(
+                      '${RoutePaths.feed}/${post.id}',
+                    );
+                  },
+                );
+              },
+            ),
             PostsError(:final failure) => ErrorView(
-                failure: failure,
-                onRetry: () => context.read<PostsCubit>().loadPosts(),
-              ),
+              failure: failure,
+              onRetry: () => context.read<PostsCubit>().loadPosts(),
+            ),
           };
         },
       ),

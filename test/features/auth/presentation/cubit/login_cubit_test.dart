@@ -28,9 +28,9 @@ void main() {
   });
 
   LoginCubit buildCubit() => LoginCubit(
-        loginUseCase: mockLoginUseCase,
-        userRepository: mockUserRepository,
-      );
+    loginUseCase: mockLoginUseCase,
+    userRepository: mockUserRepository,
+  );
 
   group('$LoginCubit', () {
     test('initial state is $LoginState', () async {
@@ -86,8 +86,9 @@ void main() {
         'emits inProgress then success on success',
         build: buildCubit,
         setUp: () {
-          when(() => mockLoginUseCase(any()))
-              .thenAnswer((_) async => const Right(TestFixtures.authTokens));
+          when(
+            () => mockLoginUseCase(any()),
+          ).thenAnswer((_) async => const Right(TestFixtures.authTokens));
           when(
             () => mockUserRepository.login(
               email: any(named: 'email'),
@@ -101,12 +102,16 @@ void main() {
         ),
         act: (cubit) => cubit.loginWithCredentials(),
         expect: () => [
-          isA<LoginState>()
-              .having((s) => s.status, 'status',
-                  FormzSubmissionStatus.inProgress),
-          isA<LoginState>()
-              .having((s) => s.status, 'status',
-                  FormzSubmissionStatus.success),
+          isA<LoginState>().having(
+            (s) => s.status,
+            'status',
+            FormzSubmissionStatus.inProgress,
+          ),
+          isA<LoginState>().having(
+            (s) => s.status,
+            'status',
+            FormzSubmissionStatus.success,
+          ),
         ],
       );
 
@@ -124,12 +129,13 @@ void main() {
         ),
         act: (cubit) => cubit.loginWithCredentials(),
         expect: () => [
+          isA<LoginState>().having(
+            (s) => s.status,
+            'status',
+            FormzSubmissionStatus.inProgress,
+          ),
           isA<LoginState>()
-              .having((s) => s.status, 'status',
-                  FormzSubmissionStatus.inProgress),
-          isA<LoginState>()
-              .having((s) => s.status, 'status',
-                  FormzSubmissionStatus.failure)
+              .having((s) => s.status, 'status', FormzSubmissionStatus.failure)
               .having(
                 (s) => s.failure,
                 'failure',
@@ -142,8 +148,9 @@ void main() {
         'emits success even when userRepository.login throws',
         build: buildCubit,
         setUp: () {
-          when(() => mockLoginUseCase(any()))
-              .thenAnswer((_) async => const Right(TestFixtures.authTokens));
+          when(
+            () => mockLoginUseCase(any()),
+          ).thenAnswer((_) async => const Right(TestFixtures.authTokens));
           when(
             () => mockUserRepository.login(
               email: any(named: 'email'),
@@ -157,12 +164,16 @@ void main() {
         ),
         act: (cubit) => cubit.loginWithCredentials(),
         expect: () => [
-          isA<LoginState>()
-              .having((s) => s.status, 'status',
-                  FormzSubmissionStatus.inProgress),
-          isA<LoginState>()
-              .having((s) => s.status, 'status',
-                  FormzSubmissionStatus.success),
+          isA<LoginState>().having(
+            (s) => s.status,
+            'status',
+            FormzSubmissionStatus.inProgress,
+          ),
+          isA<LoginState>().having(
+            (s) => s.status,
+            'status',
+            FormzSubmissionStatus.success,
+          ),
         ],
       );
     });

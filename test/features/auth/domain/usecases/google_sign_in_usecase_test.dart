@@ -19,8 +19,7 @@ void main() {
     const params = SocialSignInParams(token: 'google_token');
 
     test('returns $AuthTokens from repository on success', () async {
-      fakeRepository.googleSignInResult =
-          const Right(TestFixtures.authTokens);
+      fakeRepository.googleSignInResult = const Right(TestFixtures.authTokens);
 
       final result = await useCase(params);
 
@@ -32,8 +31,7 @@ void main() {
     });
 
     test('returns $Failure when repository fails', () async {
-      fakeRepository.googleSignInResult =
-          const Left(TestFixtures.authFailure);
+      fakeRepository.googleSignInResult = const Left(TestFixtures.authFailure);
 
       final result = await useCase(params);
 

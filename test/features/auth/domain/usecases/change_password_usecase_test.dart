@@ -30,8 +30,9 @@ void main() {
     });
 
     test('returns $Failure when repository fails', () async {
-      fakeRepository.changePasswordResult =
-          const Left(TestFixtures.authFailure);
+      fakeRepository.changePasswordResult = const Left(
+        TestFixtures.authFailure,
+      );
 
       final result = await useCase(params);
 

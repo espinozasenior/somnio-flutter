@@ -28,9 +28,9 @@ void main() {
   });
 
   SignupCubit buildCubit() => SignupCubit(
-        registerUseCase: mockRegisterUseCase,
-        userRepository: mockUserRepository,
-      );
+    registerUseCase: mockRegisterUseCase,
+    userRepository: mockUserRepository,
+  );
 
   group('$SignupCubit', () {
     test('initial state is $SignupState', () async {
@@ -118,8 +118,9 @@ void main() {
         'emits inProgress then success on success',
         build: buildCubit,
         setUp: () {
-          when(() => mockRegisterUseCase(any()))
-              .thenAnswer((_) async => const Right(TestFixtures.authTokens));
+          when(
+            () => mockRegisterUseCase(any()),
+          ).thenAnswer((_) async => const Right(TestFixtures.authTokens));
           when(
             () => mockUserRepository.register(
               email: any(named: 'email'),

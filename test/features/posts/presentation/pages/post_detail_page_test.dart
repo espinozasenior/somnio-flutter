@@ -23,13 +23,14 @@ void main() {
     mockPostDetailCubit = MockPostDetailCubit();
     getIt.registerFactory<PostDetailCubit>(() => mockPostDetailCubit);
 
-    when(() => mockPostDetailCubit.state)
-        .thenReturn(const PostDetailState.initial());
-    when(() => mockPostDetailCubit.stream)
-        .thenAnswer((_) => const Stream.empty());
+    when(
+      () => mockPostDetailCubit.state,
+    ).thenReturn(const PostDetailState.initial());
+    when(
+      () => mockPostDetailCubit.stream,
+    ).thenAnswer((_) => const Stream.empty());
     when(() => mockPostDetailCubit.close()).thenAnswer((_) async {});
-    when(() => mockPostDetailCubit.loadPost(any()))
-        .thenAnswer((_) async {});
+    when(() => mockPostDetailCubit.loadPost(any())).thenAnswer((_) async {});
   });
 
   tearDown(() async {
@@ -38,8 +39,9 @@ void main() {
 
   group('PostDetailPage', () {
     testWidgets('shows LoadingView when state is loading', (tester) async {
-      when(() => mockPostDetailCubit.state)
-          .thenReturn(const PostDetailState.loading());
+      when(
+        () => mockPostDetailCubit.state,
+      ).thenReturn(const PostDetailState.loading());
 
       await tester.pumpApp(const PostDetailPage(id: '1'));
       await tester.pump();
@@ -49,8 +51,9 @@ void main() {
 
     testWidgets('shows post title and body when loaded', (tester) async {
       final post = TestFixtures.postEntity();
-      when(() => mockPostDetailCubit.state)
-          .thenReturn(PostDetailState.loaded(post));
+      when(
+        () => mockPostDetailCubit.state,
+      ).thenReturn(PostDetailState.loaded(post));
 
       await tester.pumpApp(const PostDetailPage(id: '1'));
       await tester.pump();
@@ -60,8 +63,9 @@ void main() {
     });
 
     testWidgets('shows ErrorView when state is error', (tester) async {
-      when(() => mockPostDetailCubit.state)
-          .thenReturn(const PostDetailState.error(TestFixtures.serverFailure));
+      when(
+        () => mockPostDetailCubit.state,
+      ).thenReturn(const PostDetailState.error(TestFixtures.serverFailure));
 
       await tester.pumpApp(const PostDetailPage(id: '1'));
       await tester.pump();
@@ -71,8 +75,9 @@ void main() {
     });
 
     testWidgets('retry button calls loadPost', (tester) async {
-      when(() => mockPostDetailCubit.state)
-          .thenReturn(const PostDetailState.error(TestFixtures.serverFailure));
+      when(
+        () => mockPostDetailCubit.state,
+      ).thenReturn(const PostDetailState.error(TestFixtures.serverFailure));
 
       await tester.pumpApp(const PostDetailPage(id: '1'));
       await tester.pump();
@@ -85,10 +90,10 @@ void main() {
       verify(() => mockPostDetailCubit.loadPost(1)).called(1);
     });
 
-    testWidgets('shows SizedBox.shrink when state is initial',
-        (tester) async {
-      when(() => mockPostDetailCubit.state)
-          .thenReturn(const PostDetailState.initial());
+    testWidgets('shows SizedBox.shrink when state is initial', (tester) async {
+      when(
+        () => mockPostDetailCubit.state,
+      ).thenReturn(const PostDetailState.initial());
 
       await tester.pumpApp(const PostDetailPage(id: '1'));
       await tester.pump();

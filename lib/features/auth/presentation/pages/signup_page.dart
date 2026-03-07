@@ -58,8 +58,8 @@ class _SignupView extends StatelessWidget {
                   Text(
                     'Sign up to get started',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 32),
@@ -140,14 +140,15 @@ class _SignupView extends StatelessWidget {
                         onPressed: isLoading
                             ? null
                             : () => context
-                                .read<SignupCubit>()
-                                .signupWithCredentials(),
+                                  .read<SignupCubit>()
+                                  .signupWithCredentials(),
                         child: isLoading
                             ? const SizedBox(
                                 height: 24,
                                 width: 24,
-                                child:
-                                    CircularProgressIndicator(strokeWidth: 2),
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
                               )
                             : const Text('Sign Up'),
                       );

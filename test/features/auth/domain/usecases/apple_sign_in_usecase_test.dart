@@ -20,8 +20,7 @@ void main() {
     const params = SocialSignInParams(token: 'apple_token');
 
     test('returns $AuthTokens from repository on success', () async {
-      fakeRepository.appleSignInResult =
-          const Right(TestFixtures.authTokens);
+      fakeRepository.appleSignInResult = const Right(TestFixtures.authTokens);
 
       final result = await useCase(params);
 
@@ -33,8 +32,7 @@ void main() {
     });
 
     test('returns $Failure when repository fails', () async {
-      fakeRepository.appleSignInResult =
-          const Left(TestFixtures.authFailure);
+      fakeRepository.appleSignInResult = const Left(TestFixtures.authFailure);
 
       final result = await useCase(params);
 

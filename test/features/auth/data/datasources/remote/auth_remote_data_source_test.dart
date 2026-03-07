@@ -66,8 +66,9 @@ void main() {
 
   group('login', () {
     test('returns AuthResponse on success', () async {
-      when(() => mockClient.login(any()))
-          .thenAnswer((_) async => tAuthResponse);
+      when(
+        () => mockClient.login(any()),
+      ).thenAnswer((_) async => tAuthResponse);
 
       final result = await dataSource.login(
         email: 'test@example.com',
@@ -78,8 +79,9 @@ void main() {
     });
 
     test('throws AuthException on 401', () async {
-      when(() => mockClient.login(any()))
-          .thenThrow(makeDioException(statusCode: 401));
+      when(
+        () => mockClient.login(any()),
+      ).thenThrow(makeDioException(statusCode: 401));
 
       expect(
         () => dataSource.login(email: 'e', password: 'p'),
@@ -88,8 +90,9 @@ void main() {
     });
 
     test('throws ServerException on 500', () async {
-      when(() => mockClient.login(any()))
-          .thenThrow(makeDioException(statusCode: 500));
+      when(
+        () => mockClient.login(any()),
+      ).thenThrow(makeDioException(statusCode: 500));
 
       expect(
         () => dataSource.login(email: 'e', password: 'p'),
@@ -111,8 +114,9 @@ void main() {
 
   group('register', () {
     test('returns AuthResponse on success', () async {
-      when(() => mockClient.register(any()))
-          .thenAnswer((_) async => tAuthResponse);
+      when(
+        () => mockClient.register(any()),
+      ).thenAnswer((_) async => tAuthResponse);
 
       final result = await dataSource.register(
         email: 'e',
@@ -124,8 +128,9 @@ void main() {
     });
 
     test('throws on DioException', () async {
-      when(() => mockClient.register(any()))
-          .thenThrow(makeDioException(statusCode: 400));
+      when(
+        () => mockClient.register(any()),
+      ).thenThrow(makeDioException(statusCode: 400));
 
       expect(
         () => dataSource.register(email: 'e', password: 'p', name: 'n'),
@@ -142,8 +147,9 @@ void main() {
     });
 
     test('throws on DioException', () async {
-      when(() => mockClient.logout())
-          .thenThrow(makeDioException(statusCode: 500));
+      when(
+        () => mockClient.logout(),
+      ).thenThrow(makeDioException(statusCode: 500));
 
       expect(
         () => dataSource.logout(),
@@ -154,8 +160,9 @@ void main() {
 
   group('googleSignIn', () {
     test('returns AuthResponse on success', () async {
-      when(() => mockClient.googleSignIn(any()))
-          .thenAnswer((_) async => tAuthResponse);
+      when(
+        () => mockClient.googleSignIn(any()),
+      ).thenAnswer((_) async => tAuthResponse);
 
       final result = await dataSource.googleSignIn(token: 'token');
 
@@ -165,8 +172,9 @@ void main() {
 
   group('appleSignIn', () {
     test('returns AuthResponse on success', () async {
-      when(() => mockClient.appleSignIn(any()))
-          .thenAnswer((_) async => tAuthResponse);
+      when(
+        () => mockClient.appleSignIn(any()),
+      ).thenAnswer((_) async => tAuthResponse);
 
       final result = await dataSource.appleSignIn(token: 'token');
 
@@ -176,8 +184,7 @@ void main() {
 
   group('changePassword', () {
     test('completes on success', () async {
-      when(() => mockClient.changePassword(any()))
-          .thenAnswer((_) async {});
+      when(() => mockClient.changePassword(any())).thenAnswer((_) async {});
 
       await expectLater(
         dataSource.changePassword(
@@ -191,8 +198,7 @@ void main() {
 
   group('deleteAccount', () {
     test('completes on success', () async {
-      when(() => mockClient.deleteAccount(any()))
-          .thenAnswer((_) async {});
+      when(() => mockClient.deleteAccount(any())).thenAnswer((_) async {});
 
       await expectLater(
         dataSource.deleteAccount('1'),
@@ -203,8 +209,7 @@ void main() {
 
   group('getProfile', () {
     test('returns ProfileResponse on success', () async {
-      when(() => mockClient.getProfile())
-          .thenAnswer((_) async => tProfile);
+      when(() => mockClient.getProfile()).thenAnswer((_) async => tProfile);
 
       final result = await dataSource.getProfile();
 
@@ -212,8 +217,9 @@ void main() {
     });
 
     test('throws AuthException on 403', () async {
-      when(() => mockClient.getProfile())
-          .thenThrow(makeDioException(statusCode: 403));
+      when(
+        () => mockClient.getProfile(),
+      ).thenThrow(makeDioException(statusCode: 403));
 
       expect(
         () => dataSource.getProfile(),
@@ -258,8 +264,7 @@ void main() {
       }
     });
 
-    test('throws AuthException with default message on 401 no data',
-        () async {
+    test('throws AuthException with default message on 401 no data', () async {
       when(() => mockClient.login(any())).thenThrow(
         makeDioException(statusCode: 401),
       );
@@ -286,8 +291,7 @@ void main() {
       }
     });
 
-    test('throws ServerException with statusCode 500 on no response',
-        () async {
+    test('throws ServerException with statusCode 500 on no response', () async {
       when(() => mockClient.login(any())).thenThrow(
         makeDioException(),
       );
@@ -295,8 +299,7 @@ void main() {
       expect(
         () => dataSource.login(email: 'e', password: 'p'),
         throwsA(
-          isA<ServerException>()
-              .having((e) => e.statusCode, 'statusCode', 500),
+          isA<ServerException>().having((e) => e.statusCode, 'statusCode', 500),
         ),
       );
     });
@@ -358,8 +361,9 @@ void main() {
 
   group('error paths for other methods', () {
     test('googleSignIn throws on DioException', () async {
-      when(() => mockClient.googleSignIn(any()))
-          .thenThrow(makeDioException(statusCode: 500));
+      when(
+        () => mockClient.googleSignIn(any()),
+      ).thenThrow(makeDioException(statusCode: 500));
 
       expect(
         () => dataSource.googleSignIn(token: 'token'),
@@ -368,8 +372,9 @@ void main() {
     });
 
     test('appleSignIn throws on DioException', () async {
-      when(() => mockClient.appleSignIn(any()))
-          .thenThrow(makeDioException(statusCode: 500));
+      when(
+        () => mockClient.appleSignIn(any()),
+      ).thenThrow(makeDioException(statusCode: 500));
 
       expect(
         () => dataSource.appleSignIn(token: 'token'),
@@ -378,8 +383,9 @@ void main() {
     });
 
     test('changePassword throws on DioException', () async {
-      when(() => mockClient.changePassword(any()))
-          .thenThrow(makeDioException(statusCode: 500));
+      when(
+        () => mockClient.changePassword(any()),
+      ).thenThrow(makeDioException(statusCode: 500));
 
       expect(
         () => dataSource.changePassword(
@@ -391,8 +397,9 @@ void main() {
     });
 
     test('deleteAccount throws on DioException', () async {
-      when(() => mockClient.deleteAccount(any()))
-          .thenThrow(makeDioException(statusCode: 500));
+      when(
+        () => mockClient.deleteAccount(any()),
+      ).thenThrow(makeDioException(statusCode: 500));
 
       expect(
         () => dataSource.deleteAccount('1'),

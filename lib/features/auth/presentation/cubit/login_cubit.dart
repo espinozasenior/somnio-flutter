@@ -9,9 +9,9 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit({
     required LoginUseCase loginUseCase,
     required UserRepository userRepository,
-  })  : _loginUseCase = loginUseCase,
-        _userRepository = userRepository,
-        super(const LoginState());
+  }) : _loginUseCase = loginUseCase,
+       _userRepository = userRepository,
+       super(const LoginState());
 
   final LoginUseCase _loginUseCase;
   final UserRepository _userRepository;

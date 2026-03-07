@@ -59,8 +59,8 @@ class _LoginView extends StatelessWidget {
                   Text(
                     'Sign in to your account',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 32),
@@ -106,14 +106,15 @@ class _LoginView extends StatelessWidget {
                         onPressed: isLoading
                             ? null
                             : () => context
-                                .read<LoginCubit>()
-                                .loginWithCredentials(),
+                                  .read<LoginCubit>()
+                                  .loginWithCredentials(),
                         child: isLoading
                             ? const SizedBox(
                                 height: 24,
                                 width: 24,
-                                child:
-                                    CircularProgressIndicator(strokeWidth: 2),
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
                               )
                             : const Text('Sign In'),
                       );

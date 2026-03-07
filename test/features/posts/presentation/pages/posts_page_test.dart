@@ -21,10 +21,8 @@ void main() {
     mockPostsCubit = MockPostsCubit();
     getIt.registerFactory<PostsCubit>(() => mockPostsCubit);
 
-    when(() => mockPostsCubit.state)
-        .thenReturn(const PostsState.initial());
-    when(() => mockPostsCubit.stream)
-        .thenAnswer((_) => const Stream.empty());
+    when(() => mockPostsCubit.state).thenReturn(const PostsState.initial());
+    when(() => mockPostsCubit.stream).thenAnswer((_) => const Stream.empty());
     when(() => mockPostsCubit.close()).thenAnswer((_) async {});
     when(() => mockPostsCubit.loadPosts()).thenAnswer((_) async {});
   });
@@ -43,8 +41,7 @@ void main() {
     });
 
     testWidgets('shows LoadingView when state is loading', (tester) async {
-      when(() => mockPostsCubit.state)
-          .thenReturn(const PostsState.loading());
+      when(() => mockPostsCubit.state).thenReturn(const PostsState.loading());
 
       await tester.pumpApp(const PostsPage());
       await tester.pump();
@@ -54,8 +51,7 @@ void main() {
 
     testWidgets('shows ListView when state is loaded', (tester) async {
       final posts = TestFixtures.postEntities(3);
-      when(() => mockPostsCubit.state)
-          .thenReturn(PostsState.loaded(posts));
+      when(() => mockPostsCubit.state).thenReturn(PostsState.loaded(posts));
 
       await tester.pumpApp(const PostsPage());
       await tester.pump();
@@ -65,8 +61,9 @@ void main() {
     });
 
     testWidgets('shows ErrorView when state is error', (tester) async {
-      when(() => mockPostsCubit.state)
-          .thenReturn(const PostsState.error(TestFixtures.serverFailure));
+      when(
+        () => mockPostsCubit.state,
+      ).thenReturn(const PostsState.error(TestFixtures.serverFailure));
 
       await tester.pumpApp(const PostsPage());
       await tester.pump();
@@ -77,8 +74,9 @@ void main() {
     });
 
     testWidgets('retry button calls loadPosts', (tester) async {
-      when(() => mockPostsCubit.state)
-          .thenReturn(const PostsState.error(TestFixtures.serverFailure));
+      when(
+        () => mockPostsCubit.state,
+      ).thenReturn(const PostsState.error(TestFixtures.serverFailure));
 
       await tester.pumpApp(const PostsPage());
       await tester.pump();
@@ -91,10 +89,8 @@ void main() {
       verify(() => mockPostsCubit.loadPosts()).called(1);
     });
 
-    testWidgets('shows SizedBox.shrink when state is initial',
-        (tester) async {
-      when(() => mockPostsCubit.state)
-          .thenReturn(const PostsState.initial());
+    testWidgets('shows SizedBox.shrink when state is initial', (tester) async {
+      when(() => mockPostsCubit.state).thenReturn(const PostsState.initial());
 
       await tester.pumpApp(const PostsPage());
       await tester.pump();

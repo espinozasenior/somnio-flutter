@@ -9,9 +9,9 @@ class SignupCubit extends Cubit<SignupState> {
   SignupCubit({
     required RegisterUseCase registerUseCase,
     required UserRepository userRepository,
-  })  : _registerUseCase = registerUseCase,
-        _userRepository = userRepository,
-        super(const SignupState());
+  }) : _registerUseCase = registerUseCase,
+       _userRepository = userRepository,
+       super(const SignupState());
 
   final RegisterUseCase _registerUseCase;
   final UserRepository _userRepository;

@@ -10,9 +10,9 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit({
     required UserRepository userRepository,
     required LogoutUseCase logoutUseCase,
-  })  : _userRepository = userRepository,
-        _logoutUseCase = logoutUseCase,
-        super(const AuthState()) {
+  }) : _userRepository = userRepository,
+       _logoutUseCase = logoutUseCase,
+       super(const AuthState()) {
     _statusSubscription = _userRepository.status.listen(_onStatusChanged);
     _userSubscription = _userRepository.user.listen(_onUserChanged);
   }

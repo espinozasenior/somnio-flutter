@@ -37,10 +37,8 @@ void main() {
     group('getPosts', () {
       test('returns remote data when online', () async {
         final models = TestFixtures.postModels(2);
-        when(() => mockNetworkInfo.isConnected)
-            .thenAnswer((_) async => true);
-        when(() => mockRemote.getPosts())
-            .thenAnswer((_) async => models);
+        when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+        when(() => mockRemote.getPosts()).thenAnswer((_) async => models);
         when(() => mockLocal.cachePosts(models)).thenAnswer((_) async {});
 
         final result = await repository.getPosts();
@@ -52,10 +50,8 @@ void main() {
 
       test('caches data after remote fetch', () async {
         final models = TestFixtures.postModels(2);
-        when(() => mockNetworkInfo.isConnected)
-            .thenAnswer((_) async => true);
-        when(() => mockRemote.getPosts())
-            .thenAnswer((_) async => models);
+        when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+        when(() => mockRemote.getPosts()).thenAnswer((_) async => models);
         when(() => mockLocal.cachePosts(models)).thenAnswer((_) async {});
 
         await repository.getPosts();
@@ -65,10 +61,8 @@ void main() {
 
       test('returns cached data when offline', () async {
         final models = TestFixtures.postModels(2);
-        when(() => mockNetworkInfo.isConnected)
-            .thenAnswer((_) async => false);
-        when(() => mockLocal.getCachedPosts())
-            .thenAnswer((_) async => models);
+        when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => false);
+        when(() => mockLocal.getCachedPosts()).thenAnswer((_) async => models);
 
         final result = await repository.getPosts();
 
@@ -78,10 +72,10 @@ void main() {
       });
 
       test('returns $CacheFailure when offline and no cache', () async {
-        when(() => mockNetworkInfo.isConnected)
-            .thenAnswer((_) async => false);
-        when(() => mockLocal.getCachedPosts())
-            .thenThrow(const CacheException(message: 'No cached posts'));
+        when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => false);
+        when(
+          () => mockLocal.getCachedPosts(),
+        ).thenThrow(const CacheException(message: 'No cached posts'));
 
         final result = await repository.getPosts();
 
@@ -99,8 +93,7 @@ void main() {
     group('getPostById', () {
       test('returns entity on success', () async {
         final model = TestFixtures.postModel();
-        when(() => mockRemote.getPostById(1))
-            .thenAnswer((_) async => model);
+        when(() => mockRemote.getPostById(1)).thenAnswer((_) async => model);
 
         final result = await repository.getPostById(1);
 

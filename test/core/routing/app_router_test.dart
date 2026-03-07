@@ -30,24 +30,23 @@ void main() {
       mockSignupCubit = MockSignupCubit();
       mockPostsCubit = MockPostsCubit();
 
-      when(() => mockUserRepository.status)
-          .thenAnswer((_) => const Stream<AuthStatus>.empty());
+      when(
+        () => mockUserRepository.status,
+      ).thenAnswer((_) => const Stream<AuthStatus>.empty());
       when(() => mockUserRepository.currentUser).thenReturn(User.empty);
 
       when(() => mockLoginCubit.state).thenReturn(const LoginState());
-      when(() => mockLoginCubit.stream)
-          .thenAnswer((_) => const Stream.empty());
+      when(() => mockLoginCubit.stream).thenAnswer((_) => const Stream.empty());
       when(() => mockLoginCubit.close()).thenAnswer((_) async {});
 
       when(() => mockSignupCubit.state).thenReturn(const SignupState());
-      when(() => mockSignupCubit.stream)
-          .thenAnswer((_) => const Stream.empty());
+      when(
+        () => mockSignupCubit.stream,
+      ).thenAnswer((_) => const Stream.empty());
       when(() => mockSignupCubit.close()).thenAnswer((_) async {});
 
-      when(() => mockPostsCubit.state)
-          .thenReturn(const PostsState.initial());
-      when(() => mockPostsCubit.stream)
-          .thenAnswer((_) => const Stream.empty());
+      when(() => mockPostsCubit.state).thenReturn(const PostsState.initial());
+      when(() => mockPostsCubit.stream).thenAnswer((_) => const Stream.empty());
       when(() => mockPostsCubit.close()).thenAnswer((_) async {});
       when(() => mockPostsCubit.loadPosts()).thenAnswer((_) async {});
 

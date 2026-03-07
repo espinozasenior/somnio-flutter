@@ -6,18 +6,18 @@ import 'package:somnio/features/posts/domain/entities/post_entity.dart';
 
 abstract final class TestFixtures {
   static PostEntity postEntity({int id = 1}) => PostEntity(
-        id: id,
-        userId: 1,
-        title: 'Test Post $id',
-        body: 'Test body for post $id',
-      );
+    id: id,
+    userId: 1,
+    title: 'Test Post $id',
+    body: 'Test body for post $id',
+  );
 
   static PostModel postModel({int id = 1}) => PostModel(
-        id: id,
-        userId: 1,
-        title: 'Test Post $id',
-        body: 'Test body for post $id',
-      );
+    id: id,
+    userId: 1,
+    title: 'Test Post $id',
+    body: 'Test body for post $id',
+  );
 
   static List<PostEntity> postEntities(int count) =>
       List.generate(count, (i) => postEntity(id: i + 1));
@@ -49,8 +49,8 @@ abstract final class TestFixtures {
   );
 
   static UserEntity userEntity({String id = '1'}) => UserEntity(
-        id: id,
-        email: 'test@example.com',
-        name: 'Test User',
-      );
+    id: id,
+    email: 'test@example.com',
+    name: 'Test User',
+  );
 }

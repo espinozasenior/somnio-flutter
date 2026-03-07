@@ -23,10 +23,12 @@ void main() {
     statusController = StreamController<AuthStatus>.broadcast();
     userController = StreamController<User>.broadcast();
 
-    when(() => mockUserRepository.status)
-        .thenAnswer((_) => statusController.stream);
-    when(() => mockUserRepository.user)
-        .thenAnswer((_) => userController.stream);
+    when(
+      () => mockUserRepository.status,
+    ).thenAnswer((_) => statusController.stream);
+    when(
+      () => mockUserRepository.user,
+    ).thenAnswer((_) => userController.stream);
   });
 
   tearDown(() async {
@@ -39,9 +41,9 @@ void main() {
   });
 
   AuthCubit buildCubit() => AuthCubit(
-        userRepository: mockUserRepository,
-        logoutUseCase: mockLogoutUseCase,
-      );
+    userRepository: mockUserRepository,
+    logoutUseCase: mockLogoutUseCase,
+  );
 
   group('$AuthCubit', () {
     test('initial state is $AuthState with unknown status', () async {
@@ -82,8 +84,9 @@ void main() {
       'calls logout use case when logout is called',
       build: buildCubit,
       setUp: () {
-        when(() => mockLogoutUseCase(any()))
-            .thenAnswer((_) async => const Right(unit));
+        when(
+          () => mockLogoutUseCase(any()),
+        ).thenAnswer((_) async => const Right(unit));
       },
       act: (cubit) => cubit.logout(),
       verify: (_) {

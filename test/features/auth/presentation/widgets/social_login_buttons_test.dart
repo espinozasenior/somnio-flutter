@@ -18,8 +18,9 @@ void main() {
       expect(find.byType(OutlinedButton), findsNWidgets(2));
     });
 
-    testWidgets('calls onGooglePressed when Google button tapped',
-        (tester) async {
+    testWidgets('calls onGooglePressed when Google button tapped', (
+      tester,
+    ) async {
       var googlePressed = false;
 
       await tester.pumpApp(
@@ -35,8 +36,9 @@ void main() {
       expect(googlePressed, isTrue);
     });
 
-    testWidgets('calls onApplePressed when Apple button tapped',
-        (tester) async {
+    testWidgets('calls onApplePressed when Apple button tapped', (
+      tester,
+    ) async {
       var applePressed = false;
 
       await tester.pumpApp(

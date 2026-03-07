@@ -16,8 +16,9 @@ void main() {
 
   group('$NetworkInfoImpl', () {
     test('returns true when connected via wifi', () async {
-      when(() => mockConnectivity.checkConnectivity())
-          .thenAnswer((_) async => [ConnectivityResult.wifi]);
+      when(
+        () => mockConnectivity.checkConnectivity(),
+      ).thenAnswer((_) async => [ConnectivityResult.wifi]);
 
       final result = await networkInfo.isConnected;
 
@@ -25,8 +26,9 @@ void main() {
     });
 
     test('returns true when connected via mobile', () async {
-      when(() => mockConnectivity.checkConnectivity())
-          .thenAnswer((_) async => [ConnectivityResult.mobile]);
+      when(
+        () => mockConnectivity.checkConnectivity(),
+      ).thenAnswer((_) async => [ConnectivityResult.mobile]);
 
       final result = await networkInfo.isConnected;
 
@@ -34,8 +36,9 @@ void main() {
     });
 
     test('returns false when no connectivity', () async {
-      when(() => mockConnectivity.checkConnectivity())
-          .thenAnswer((_) async => [ConnectivityResult.none]);
+      when(
+        () => mockConnectivity.checkConnectivity(),
+      ).thenAnswer((_) async => [ConnectivityResult.none]);
 
       final result = await networkInfo.isConnected;
 
@@ -43,8 +46,9 @@ void main() {
     });
 
     test('returns false when results are empty', () async {
-      when(() => mockConnectivity.checkConnectivity())
-          .thenAnswer((_) async => []);
+      when(
+        () => mockConnectivity.checkConnectivity(),
+      ).thenAnswer((_) async => []);
 
       final result = await networkInfo.isConnected;
 
@@ -52,8 +56,7 @@ void main() {
     });
 
     test('returns true with multiple results not containing none', () async {
-      when(() => mockConnectivity.checkConnectivity())
-          .thenAnswer(
+      when(() => mockConnectivity.checkConnectivity()).thenAnswer(
         (_) async => [ConnectivityResult.wifi, ConnectivityResult.mobile],
       );
 

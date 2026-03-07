@@ -160,8 +160,9 @@ void main() {
     });
 
     test('returns $ServerFailure on exception', () async {
-      when(() => mockRemote.logout())
-          .thenThrow(const ServerException(message: 'err', statusCode: 500));
+      when(
+        () => mockRemote.logout(),
+      ).thenThrow(const ServerException(message: 'err', statusCode: 500));
 
       final result = await repository.logout();
 
@@ -171,8 +172,9 @@ void main() {
 
   group('googleSignIn', () {
     test('returns $AuthTokens on success', () async {
-      when(() => mockRemote.googleSignIn(token: any(named: 'token')))
-          .thenAnswer((_) async => tAuthResponse);
+      when(
+        () => mockRemote.googleSignIn(token: any(named: 'token')),
+      ).thenAnswer((_) async => tAuthResponse);
       when(
         () => mockLocal.saveTokens(
           accessToken: any(named: 'accessToken'),
@@ -188,8 +190,9 @@ void main() {
 
   group('appleSignIn', () {
     test('returns $AuthTokens on success', () async {
-      when(() => mockRemote.appleSignIn(token: any(named: 'token')))
-          .thenAnswer((_) async => tAuthResponse);
+      when(
+        () => mockRemote.appleSignIn(token: any(named: 'token')),
+      ).thenAnswer((_) async => tAuthResponse);
       when(
         () => mockLocal.saveTokens(
           accessToken: any(named: 'accessToken'),
@@ -223,8 +226,7 @@ void main() {
 
   group('deleteAccount', () {
     test('returns unit on success and clears tokens', () async {
-      when(() => mockRemote.getProfile())
-          .thenAnswer((_) async => tProfile);
+      when(() => mockRemote.getProfile()).thenAnswer((_) async => tProfile);
       when(() => mockRemote.deleteAccount(any())).thenAnswer((_) async {});
       when(() => mockLocal.clearTokens()).thenAnswer((_) async {});
 
@@ -238,8 +240,7 @@ void main() {
 
   group('getProfile', () {
     test('returns $UserEntity on success', () async {
-      when(() => mockRemote.getProfile())
-          .thenAnswer((_) async => tProfile);
+      when(() => mockRemote.getProfile()).thenAnswer((_) async => tProfile);
 
       final result = await repository.getProfile();
 
@@ -255,8 +256,7 @@ void main() {
     });
 
     test('returns $NetworkFailure on $NetworkException', () async {
-      when(() => mockRemote.getProfile())
-          .thenThrow(const NetworkException());
+      when(() => mockRemote.getProfile()).thenThrow(const NetworkException());
 
       final result = await repository.getProfile();
 

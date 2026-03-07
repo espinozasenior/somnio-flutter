@@ -25,8 +25,7 @@ void main() {
     getIt.registerFactory<SignupCubit>(() => mockSignupCubit);
 
     when(() => mockSignupCubit.state).thenReturn(const SignupState());
-    when(() => mockSignupCubit.stream)
-        .thenAnswer((_) => const Stream.empty());
+    when(() => mockSignupCubit.stream).thenAnswer((_) => const Stream.empty());
     when(() => mockSignupCubit.close()).thenAnswer((_) async {});
   });
 
@@ -35,8 +34,9 @@ void main() {
   });
 
   group('SignupPage', () {
-    testWidgets('renders signup page with create account title',
-        (tester) async {
+    testWidgets('renders signup page with create account title', (
+      tester,
+    ) async {
       await tester.pumpApp(const SignupPage());
       await tester.pump();
 
@@ -145,8 +145,9 @@ void main() {
       expect(find.text('Invalid email'), findsOneWidget);
     });
 
-    testWidgets('shows password error when password is invalid',
-        (tester) async {
+    testWidgets('shows password error when password is invalid', (
+      tester,
+    ) async {
       when(() => mockSignupCubit.state).thenReturn(
         const SignupState(password: Password.dirty('sh')),
       );
@@ -176,10 +177,10 @@ void main() {
       expect(find.text('Passwords do not match'), findsOneWidget);
     });
 
-    testWidgets('sign up button calls signupWithCredentials',
-        (tester) async {
-      when(() => mockSignupCubit.signupWithCredentials())
-          .thenAnswer((_) async {});
+    testWidgets('sign up button calls signupWithCredentials', (tester) async {
+      when(
+        () => mockSignupCubit.signupWithCredentials(),
+      ).thenAnswer((_) async {});
 
       await tester.pumpApp(const SignupPage());
       await tester.pump();
@@ -210,8 +211,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp.router(
           routerConfig: router,
-          localizationsDelegates:
-              AppLocalizations.localizationsDelegates,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
         ),
       );

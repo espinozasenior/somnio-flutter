@@ -26,8 +26,7 @@ void main() {
     getIt.registerFactory<LoginCubit>(() => mockLoginCubit);
 
     when(() => mockLoginCubit.state).thenReturn(const LoginState());
-    when(() => mockLoginCubit.stream)
-        .thenAnswer((_) => const Stream.empty());
+    when(() => mockLoginCubit.stream).thenAnswer((_) => const Stream.empty());
     when(() => mockLoginCubit.close()).thenAnswer((_) async {});
   });
 
@@ -137,8 +136,9 @@ void main() {
       expect(find.text('Invalid email'), findsOneWidget);
     });
 
-    testWidgets('shows password error when password is invalid',
-        (tester) async {
+    testWidgets('shows password error when password is invalid', (
+      tester,
+    ) async {
       when(() => mockLoginCubit.state).thenReturn(
         const LoginState(password: Password.dirty('sh')),
       );
@@ -152,10 +152,10 @@ void main() {
       );
     });
 
-    testWidgets('sign in button calls loginWithCredentials',
-        (tester) async {
-      when(() => mockLoginCubit.loginWithCredentials())
-          .thenAnswer((_) async {});
+    testWidgets('sign in button calls loginWithCredentials', (tester) async {
+      when(
+        () => mockLoginCubit.loginWithCredentials(),
+      ).thenAnswer((_) async {});
 
       await tester.pumpApp(const LoginPage());
       await tester.pump();
@@ -186,8 +186,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp.router(
           routerConfig: router,
-          localizationsDelegates:
-              AppLocalizations.localizationsDelegates,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
         ),
       );

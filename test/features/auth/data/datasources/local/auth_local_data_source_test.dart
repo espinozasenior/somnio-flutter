@@ -45,8 +45,7 @@ void main() {
     });
 
     test('hasTokens delegates to token provider', () async {
-      when(() => mockTokenProvider.hasTokens)
-          .thenAnswer((_) async => true);
+      when(() => mockTokenProvider.hasTokens).thenAnswer((_) async => true);
 
       final result = await dataSource.hasTokens;
 
@@ -54,8 +53,7 @@ void main() {
     });
 
     test('hasTokens returns false when no tokens', () async {
-      when(() => mockTokenProvider.hasTokens)
-          .thenAnswer((_) async => false);
+      when(() => mockTokenProvider.hasTokens).thenAnswer((_) async => false);
 
       final result = await dataSource.hasTokens;
 

@@ -15,8 +15,9 @@ void main() {
       expect(find.text('Server error'), findsOneWidget);
     });
 
-    testWidgets('renders retry button when onRetry is provided',
-        (tester) async {
+    testWidgets('renders retry button when onRetry is provided', (
+      tester,
+    ) async {
       await tester.pumpApp(
         ErrorView(
           failure: TestFixtures.serverFailure,
@@ -27,8 +28,9 @@ void main() {
       expect(find.widgetWithText(FilledButton, 'Retry'), findsOneWidget);
     });
 
-    testWidgets('does not render retry button when onRetry is null',
-        (tester) async {
+    testWidgets('does not render retry button when onRetry is null', (
+      tester,
+    ) async {
       await tester.pumpApp(
         const ErrorView(failure: TestFixtures.serverFailure),
       );

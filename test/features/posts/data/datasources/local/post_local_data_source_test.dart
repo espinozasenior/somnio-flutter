@@ -42,8 +42,9 @@ void main() {
 
     group('cachePosts', () {
       test('puts JSON string into box', () async {
-        when(() => mockBox.put(any<Object?>(), any<String>()))
-            .thenAnswer((_) async {});
+        when(
+          () => mockBox.put(any<Object?>(), any<String>()),
+        ).thenAnswer((_) async {});
 
         final posts = TestFixtures.postModels(2);
         await dataSource.cachePosts(posts);

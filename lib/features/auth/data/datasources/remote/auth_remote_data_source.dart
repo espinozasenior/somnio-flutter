@@ -4,7 +4,7 @@ import 'package:somnio/core/error/exceptions.dart';
 
 class AuthRemoteDataSource {
   AuthRemoteDataSource({required AuthApiClient authApiClient})
-      : _client = authApiClient;
+    : _client = authApiClient;
 
   final AuthApiClient _client;
 

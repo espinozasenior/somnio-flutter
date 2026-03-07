@@ -13,7 +13,7 @@ import 'package:user_repository/user_repository.dart';
 
 class AppRouter {
   AppRouter({required UserRepository userRepository})
-      : _userRepository = userRepository;
+    : _userRepository = userRepository;
 
   final UserRepository _userRepository;
 

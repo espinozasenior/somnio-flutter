@@ -6,8 +6,9 @@ import '../../helpers/helpers.dart';
 
 void main() {
   group('showErrorDialog', () {
-    testWidgets('shows AlertDialog with Error title and failure message',
-        (tester) async {
+    testWidgets('shows AlertDialog with Error title and failure message', (
+      tester,
+    ) async {
       await tester.pumpApp(
         Builder(
           builder: (context) => FilledButton(

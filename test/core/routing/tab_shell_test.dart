@@ -10,8 +10,9 @@ void main() {
       expect(TabShell.new, isA<Function>());
     });
 
-    testWidgets('NavigationBar destinations are defined correctly',
-        (tester) async {
+    testWidgets('NavigationBar destinations are defined correctly', (
+      tester,
+    ) async {
       // Render just the NavigationBar portion to verify the 3 destinations
       // that TabShell defines (Feed, Search, Profile).
       await tester.pumpWidget(

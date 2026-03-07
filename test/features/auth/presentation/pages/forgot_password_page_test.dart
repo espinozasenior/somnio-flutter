@@ -41,8 +41,7 @@ void main() {
       );
     });
 
-    testWidgets('tapping send reset link does not throw',
-        (tester) async {
+    testWidgets('tapping send reset link does not throw', (tester) async {
       await tester.pumpApp(const ForgotPasswordPage());
 
       await tester.tap(
@@ -83,8 +82,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp.router(
           routerConfig: router,
-          localizationsDelegates:
-              AppLocalizations.localizationsDelegates,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
         ),
       );

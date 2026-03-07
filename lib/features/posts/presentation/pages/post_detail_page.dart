@@ -36,31 +36,31 @@ class _PostDetailView extends StatelessWidget {
             PostDetailInitial() => const SizedBox.shrink(),
             PostDetailLoading() => const LoadingView(),
             PostDetailLoaded(:final post) => Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      post.title,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      post.body,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  ],
-                ),
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    post.title,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    post.body,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ],
               ),
+            ),
             PostDetailError(:final failure) => ErrorView(
-                failure: failure,
-                onRetry: () async {
-                  final parsedId = int.tryParse(id);
-                  if (parsedId != null) {
-                    await context.read<PostDetailCubit>().loadPost(parsedId);
-                  }
-                },
-              ),
+              failure: failure,
+              onRetry: () async {
+                final parsedId = int.tryParse(id);
+                if (parsedId != null) {
+                  await context.read<PostDetailCubit>().loadPost(parsedId);
+                }
+              },
+            ),
           };
         },
       ),

@@ -42,8 +42,7 @@ void main() {
 
     test('returns Left($CacheFailure) on $CacheException', () async {
       final result = await safeApiCall<int>(
-        () async =>
-            throw const CacheException(message: 'No cached data'),
+        () async => throw const CacheException(message: 'No cached data'),
       );
       expect(
         result,
@@ -93,8 +92,7 @@ void main() {
 
     test('returns Left($CacheFailure) on $CacheException', () async {
       final result = await safeCacheCall<String>(
-        () async =>
-            throw const CacheException(message: 'empty'),
+        () async => throw const CacheException(message: 'empty'),
       );
       expect(
         result,
