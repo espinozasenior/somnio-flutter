@@ -1,0 +1,14 @@
+name: somnio-flutter
+
+packages:
+  - packages/**
+useRootAsPackage: true
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
+
+scripts:
+  codegen:
+    description: Run build_runner in all codegen-enabled packages.
+    run: dart run build_runner build --delete-conflicting-outputs && melos exec --depends-on="build_runner" -- dart run build_runner build --delete-conflicting-outputs

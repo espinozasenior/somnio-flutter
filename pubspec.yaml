@@ -50,6 +50,7 @@ dev_dependencies:
   freezed: ^3.2.5
   injectable_generator: ^2.7.0
   json_serializable: ^6.8.0
+  melos: ^6.3.3
   mocktail: ^1.0.4
   retrofit_generator: ^10.2.3
   very_good_analysis: ^10.2.0

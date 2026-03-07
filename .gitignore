@@ -75,3 +75,4 @@ flutter_*.log
 .pub-cache/
 .pub/
 pubspec.lock
+**/pubspec_overrides.yaml
