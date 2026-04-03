@@ -64,7 +64,6 @@ lcov.info
 .superset/
 .mcp.json
 .cursor/
-CLAUDE.md
 CLAUDE-flow.md
 
 # Logs
@@ -74,5 +73,4 @@ flutter_*.log
 # Pub
 .pub-cache/
 .pub/
-pubspec.lock
 **/pubspec_overrides.yaml
