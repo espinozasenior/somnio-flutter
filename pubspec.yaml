@@ -35,7 +35,7 @@ dependencies:
   intl: ^0.20.2
   json_annotation: ^4.9.0
   retrofit: ^4.4.0
-  shared_preferences: ^2.3.0
+  shared_preferences: ^2.5.5
   shimmer: ^3.0.0
   token_provider:
     path: packages/token_provider
